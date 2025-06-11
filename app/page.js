@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 export default function Home() {
   return (
     <div>Hello
-    <Button>HEllo</Button>
+    <Button variant="ghost">Hello</Button>
     </div>
   );
 }
