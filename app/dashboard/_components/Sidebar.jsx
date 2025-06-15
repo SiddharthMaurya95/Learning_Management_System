@@ -33,7 +33,9 @@ path:'/dashboard/profile'
       <h2 className='font-bold text-2xl'>Easy Study</h2>
       </div>
       <div className='mt-10' >
-        <Button className='w-full bg-blue-500 text-white'>+ Create New</Button>
+        <Link href={'/create'}>
+        <Button className='w-full bg-green-500 text-white cursor-pointer hover:bg-slate-300'>+ Create New</Button>
+        </Link>
         <div className='mt-5'>
           {MenuList.map((menu,index)=>(
             <div key={index} className={`flex gap-5 items-center p-3 hover:bg-slate-200 rounded-lg cursor-pointer mt-3 ${path==menu.path&&'bg-slate-200'}`}>
@@ -46,8 +48,8 @@ path:'/dashboard/profile'
       <div className='border p-3 bg-slate-200 rounded-lg absolute bottom-10 w-[85%]'>
         <h2 className='text-lg mb-2'>Available Credits : 5</h2>
        <Progress className='w-full bg-slate-500' value={33} />
-        <h2 className='text-sm'>1 out of 5 credits used</h2>
-        <Link href={'/dashboard/upgrade'} className='text-blue-500 text-xs mt-3'></Link>
+        <h2 className='text-sm'>1 out of 5 credits used</h2> 
+        <Link href={'/dashboard/upgrade'} className='text-green-500 text-xs mt-3'></Link>
       </div>
     </div>
     </div>
