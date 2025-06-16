@@ -3,7 +3,11 @@ import SelectOptions from './_components/SelectOptions'
 import React, { useState } from 'react'
 import { Button } from '@/components/ui/button';
 import TopicInput from './_components/TopicInput';
+import {v4 as uuidv4} from 'uuid'
+import { useUser } from '@clerk/nextjs';
+import axios from 'axios';
 function create() {
+  const {user}=useUser();
     const [step,setStep]=useState(0);
     const [formData,setFormData]=useState([]);
     const handleUserInput=(fieldName,fieldValue)=>{
@@ -13,6 +17,16 @@ function create() {
       }))
       console.log(formData);
     };
+    const GenerateCourseOutline=async()=>{
+      const courseId=uuidv4();
+      console.log(courseId)
+      const result=await axios.post('/api/generate-course-outline',{
+        courseId:courseId,
+        ...formData,
+        createdBy:user?.primaryEmailAddress?.emailAddress
+      })
+      console.log(result);
+    }
   return (
     <div className='flex flex-col items-center p-5 md:px-24 lg:px-36 mt-20 '>
         <h2 className=' text-4xl font-bold text-green-400'>Start Buliding your Personal Study Materials</h2>
@@ -23,7 +37,7 @@ function create() {
         </div>
         <div className='flex justify-between mt-32 w-full'>
             {step!=0?<Button onClick={()=>setStep(step-1)}variant='outline' className='p-4'>Prev</Button>:'-'}
-            {step==0?<Button onClick={()=>setStep(step+1)} className='bg-green-900 text-white p-4'>Next</Button>:<Button className='bg-green-900 text-white p-4'>Generate</Button>}
+            {step==0?<Button onClick={()=>setStep(step+1)} className='bg-green-900 text-white p-4'>Next</Button>:<Button onClick={GenerateCourseOutline} className='bg-green-900 text-white p-4'>Generate</Button>}
         </div>
     </div>
   )
