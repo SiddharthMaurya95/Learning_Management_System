@@ -1,19 +1,63 @@
-import { courseOutlineAIModel } from "@/configs/AiModel";
 import { STUDY_MATERIAL_TABLE } from "@/configs/schema";
+import { db } from "@/configs/db"; 
 import { NextResponse } from "next/server";
+import { GoogleGenAI } from '@google/genai';
+import { inngest } from "@/inngest/client";
 
-export async function POST(req){
-const{courseId,topic,courseType,difficultyLevel,createdBy}=await req.json();
-const prompt='Generate a study material for ' +topic+ ' for '+courseType+' and level of difficulty will be '+difficultyLevel+' with summery of course, List of Chapters along with summery for each chapter, Topic list in each chapter, all result in JSON format'
-const aiResp=await courseOutlineAIModel.sendMessage(prompt);
-const aiResult=JSON.parse(aiResp.response.text());
-const dbResult=await db.insert(STUDY_MATERIAL_TABLE).values({
-    courseId:courseId,
-    courseType:courseType,
-    createdBy:createdBy,
-    topic:topic,
-    courseLayout:aiResult
-}).returing({STUDY_MATERIAL_TABLE});
-console.log(dbResult);
-    return NextResponse.json({result:dbResult[0]})
+export async function POST(req) {
+  try {
+      const { courseId, topic, courseType, difficultyLevel, createdBy } = await req.json();
+   
+       const prompt = `Generate a study material for ${topic} for ${courseType} and level of difficulty will be ${difficultyLevel}. Include: course summary, list of chapters with summaries, topic list in each chapter, Return result in JSON format.
+       Schema:
+       {
+       "course_title":"string",
+       "difficulty":"string",
+       "summary":"string",
+       "chapters":[
+       {
+       "chapter_title":"string",
+       "summary":"string",
+       "topics":["string"]}]
+       }`;
+    const ai = new GoogleGenAI({
+      apiKey: process.env.NEXT_PUBLIC_GEMINI_API_KEY,
+    });
+
+    const response = await ai.models.generateContent({
+      model: 'gemini-2.5-flash-preview-05-20',
+      contents: [
+        {
+          role: "user",
+          parts: [{ text: prompt }],
+        },
+      ],
+    });
+        const rawResp=response?.candidates[0]?.content.parts[0]?.text;
+        const rawJson=rawResp.replace('```json','').replace('```','');
+        const JSONResp=JSON.parse(rawJson);
+
+    const dbResult = await db.insert(STUDY_MATERIAL_TABLE).values({
+      courseId,
+      courseType,
+      createdBy,
+      topic,
+      courseLayout: JSONResp,
+    }).returning({resp:STUDY_MATERIAL_TABLE});
+
+    const result= await inngest.send({
+      name:'notes.generate',
+      data:{
+        course:dbResult[0].resp
+      }
+    })
+    console.log(result)
+    return NextResponse.json({ result: dbResult[0] });
+
+
+  } catch (error) {
+    console.error("❌ API Error:", error);
+    return NextResponse.json({ error: error.message || "Server Error" }, { status: 500 });
+  }
 }
+
