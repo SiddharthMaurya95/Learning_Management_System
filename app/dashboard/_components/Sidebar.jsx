@@ -45,7 +45,7 @@ path:'/dashboard/profile'
           ))}
         </div>
       </div>
-      <div className='border p-3 bg-slate-200 rounded-lg absolute bottom-10 w-[85%]'>
+      <div className='primaryBorder p-3 bg-slate-200 rounded-lg absolute bottom-10 w-[85%]'>
         <h2 className='text-lg mb-2'>Available Credits : 5</h2>
        <Progress className='w-full bg-slate-500' value={33} />
         <h2 className='text-sm'>1 out of 5 credits used</h2> 

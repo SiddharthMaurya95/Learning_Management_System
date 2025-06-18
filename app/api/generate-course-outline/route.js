@@ -8,7 +8,7 @@ export async function POST(req) {
   try {
       const { courseId, topic, courseType, difficultyLevel, createdBy } = await req.json();
    
-       const prompt = `Generate a study material for ${topic} for ${courseType} and level of difficulty will be ${difficultyLevel}. Include: course summary, list of chapters with summaries, topic list in each chapter, Return result in JSON format.
+       const prompt = `Generate a study material for ${topic} for ${courseType} and level of difficulty will be ${difficultyLevel}. Include: course summary, list of chapters with summaries and Emoji icon for each chapter, topic list in each chapter, Return result in JSON format.
        Schema:
        {
        "course_title":"string",
@@ -17,6 +17,7 @@ export async function POST(req) {
        "chapters":[
        {
        "chapter_title":"string",
+       "emoji":"icon",
        "summary":"string",
        "topics":["string"]}]
        }`;

@@ -6,7 +6,7 @@ import { RefreshCw } from 'lucide-react'
 import Link from 'next/link'
 export default function CourseCardItem({course}) {
   return (
-    <div className='border rounded-lg shadow-md p-5'>
+    <div className='primaryBorder rounded-lg shadow-md p-5'>
         <div>
             <div className='flex justify-between items-center'>
                 <Image src={'/knowledge.png'} alt='other' width={50} height={50}></Image>
