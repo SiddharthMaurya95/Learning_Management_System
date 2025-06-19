@@ -1,7 +1,6 @@
 'use client'
 import { useParams } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-import DashboardHeader from '@/app/dashboard/_components/DashboardHeader';
 import axios from 'axios';
 import CourseIntroCard from './_components/CourseIntroCard';
 import StudyMaterialSection from './_components/StudyMaterialSection';
@@ -19,13 +18,12 @@ function course() {
     }
   return (
     <div>
-        <DashboardHeader>
-        </DashboardHeader>
-        <div className='mx-10 md:mx-36 lg:px-60 mt-10'>
+        
+        <div>
         {/* course Intro */}
         <CourseIntroCard course={course}/>
         {/* study Material Options */}
-        <StudyMaterialSection></StudyMaterialSection>
+        <StudyMaterialSection course={course} courseId={courseId}></StudyMaterialSection>
           {/* chapter List */}
           <ChapterList course={course}></ChapterList>
         </div>
