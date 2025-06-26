@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import MaterialCardItem from './MaterialCardItem'
 import axios from 'axios'
-import Link from 'next/link';
+
 
 function StudyMaterialSection({courseId,course}) {
     const [studyTypeContent,setStudyTypeContent]=useState();
@@ -43,7 +43,6 @@ const GetStudyMaterials=async ()=>{
         courseId:courseId,
         studyType:'ALL'
     })
-    console.log(course)
     console.log(result?.data);
     setStudyTypeContent(result.data)
 }
@@ -52,9 +51,9 @@ const GetStudyMaterials=async ()=>{
         <h2 className='font-medium text-xl'>Study Material</h2>
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-3'>{
             MaterialList.map((item,index)=>( 
-               // <Link key={index} href={'/course/'+courseId+item.path}>
-                <MaterialCardItem item={item} key={index} studyTypeContent={studyTypeContent} course={course}/>
-               // </Link> 
+              
+                <MaterialCardItem item={item} key={index} studyTypeContent={studyTypeContent} course={course} refreshData={GetStudyMaterials}/>
+               
             ))}</div>
     </div>
   )

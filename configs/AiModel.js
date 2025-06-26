@@ -133,5 +133,140 @@ I've finalized the flashcards, aiming for clarity, conciseness, and accuracy. Ea
     },  
   ],
     });
+
+    export const GenerateQuizAiModel = model.startChat({
+      generationConfig,
+      history: [
+    {
+      role: 'user',
+      parts: [
+        {
+          text: `Generate Quiz on topic : Flutter Fundamentals,User Interface (UI) Development,Basic App Navigation with Question and Options along with correct answer in JSON format, (Max 10)
+schema:
+{
+"quizTitle":"string",
+"questions":[
+{"question":"string",
+"options":["string",],
+"answer":"string"},]}`,
+        },
+      ],
+    },
+    {
+      role: 'model',
+      parts: [
+        {
+          text: `\`\`\`json
+{
+  "quizTitle": "Flutter Fundamentals and UI Development Quiz",
+  "questions": [
+    {
+      "question": "What is Flutter?",
+      "options": [
+        "A backend framework",
+        "A cross-platform UI toolkit",
+        "A database management system",
+        "An operating system"
+      ],
+      "answer": "A cross-platform UI toolkit"
+    },
+    {
+      "question": "Which programming language is used to develop Flutter apps?",
+      "options": [
+        "Java",
+        "Swift",
+        "Kotlin",
+        "Dart"
+      ],
+      "answer": "Dart"
+    },
+    {
+      "question": "What is a Widget in Flutter?",
+      "options": [
+        "A function that returns data",
+        "A blueprint for a UI element",
+        "A database table",
+        "A network protocol"
+      ],
+      "answer": "A blueprint for a UI element"
+    },
+    {
+      "question": "What is the purpose of the 'build' method in a Flutter Widget?",
+      "options": [
+        "To initialize the widget's state",
+        "To define the widget's visual structure",
+        "To handle user input",
+        "To connect to a database"
+      ],
+      "answer": "To define the widget's visual structure"
+    },
+    {
+      "question": "What is the difference between a StatelessWidget and a StatefulWidget?",
+      "options": [
+        "StatelessWidgets can be updated, while StatefulWidgets cannot.",
+        "StatefulWidgets can be updated, while StatelessWidget cannot.",
+        "StatelessWidgets are more performant than StatefulWidgets.",
+        "There is no difference between them."
+      ],
+      "answer": "StatefulWidgets can be updated, while StatelessWidget cannot."
+    },
+    {
+      "question": "Which widget is used for creating a vertical list of items?",
+      "options": [
+        "Row",
+        "Column",
+        "ListView",
+        "GridView"
+      ],
+      "answer": "ListView"
+    },
+    {
+      "question": "Which widget is used for creating a horizontal list of items?",
+      "options": [
+        "Row",
+        "Column",
+        "ListView",
+        "GridView"
+      ],
+      "answer": "Row"
+    },
+    {
+      "question": "What is the purpose of the 'Navigator' in Flutter?",
+      "options": [
+        "To manage network requests",
+        "To handle user authentication",
+        "To manage routes and screen transitions",
+        "To store application data"
+      ],
+      "answer": "To manage routes and screen transitions"
+    },
+    {
+      "question": "What is the function \`setState()\` used for in Flutter?",
+      "options": [
+        "To initialize the state of a widget.",
+        "To rebuild the widget with new state data.",
+        "To define the visual layout.",
+        "To handle user events."
+      ],
+      "answer": "To rebuild the widget with new state data."
+    },
+    {
+      "question": "Which layout widget arranges children in a two-dimensional, scrollable grid?",
+      "options": [
+        "Column",
+        "Row",
+        "ListView",
+        "GridView"
+      ],
+      "answer": "GridView"
+    }
+  ]
+}
+\`\`\``,
+        },
+      ],
+    }
+  ],
+    });
   
   

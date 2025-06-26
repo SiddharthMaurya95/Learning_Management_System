@@ -1,12 +1,14 @@
 "use client"
 import { useUser } from '@clerk/nextjs'
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import axios from 'axios';
 import CourseCardItem from './CourseCardItem';
 import { RefreshCw } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { CourseCountContext } from '@/app/_context/CourseCountContext';
+
 function CourseList(){
-    
+    const{totalCourses, setTotalCourses} = useContext(CourseCountContext);
     const {user}=useUser()
     const [courseList,setCourseList]=useState([]);
     useEffect(()=>{
@@ -17,7 +19,7 @@ function CourseList(){
         const result =await axios.post('/api/courses',{createdBy:user?.primaryEmailAddress?.emailAddress})
         console.log(result.data)
         setCourseList(result.data.result)
-        
+        setTotalCourses(result.data.result.length)
     }
     return (
         <div className='mt-10'>

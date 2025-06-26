@@ -3,7 +3,7 @@ import { CHAPTER_NOTES_TABLE, STUDY_MATERIAL_TABLE, STUDY_TYPE_CONTENT_TABLE, US
 import {db} from '@/configs/db'
 import { eq } from 'drizzle-orm';
 import {useUser} from '@clerk/nextjs'
-import { chatSession,GenerateStudyTypeContentAiModel } from "@/configs/AiModel";
+import { chatSession,GenerateStudyTypeContentAiModel,GenerateQuizAiModel } from "@/configs/AiModel";
 export const helloWorld = inngest.createFunction(
   { id: "hello-world" },
   { event: "test/hello.world" },
@@ -53,9 +53,9 @@ Include callout boxes (like tips or notes) with inline CSS to visually distingui
 Keep the language exam-friendly and concise, suitable for revision and quick learning,
 Ensure the page looks visually clean and engaging, even as plain HTML,
 schema:
-{
+[{
   "content": "String"
-}
+    }]
 `;
     const result=await chatSession.sendMessage(prompt)    
      const rawResp=result.response.text();
@@ -84,16 +84,19 @@ export const GenerateStudyTypeContent=inngest.createFunction(
   },
   {event:'studyType.content'},
   async({event,step})=>{
+   
     const {studyType,prompt,courseId,recordId}=event.data
-    const FlashcardAiResult= await step.run('Generaing Flashcard using AI',async()=>{
-      const result= await chatSession.sendMessage(prompt);
+    const AiResult= await step.run('Generaing Flashcard using AI',async()=>{
+      const result= 
+      studyType=='flashcard'?await GenerateStudyTypeContentAiModel.sendMessage(prompt):
+      await GenerateQuizAiModel.sendMessage(prompt);
       const AIResult=JSON.parse(result.response.text());
       return AIResult;
     })
 
     const DbResult=await step.run('Save Result to DB',async()=>{
       const result=await db.update(STUDY_TYPE_CONTENT_TABLE).set({
-        content:FlashcardAiResult,
+        content:AiResult,
         status:'Ready'
       }).where(eq(STUDY_TYPE_CONTENT_TABLE.id,recordId))
       return 'Data inserted';

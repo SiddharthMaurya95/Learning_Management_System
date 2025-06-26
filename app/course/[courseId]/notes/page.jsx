@@ -3,6 +3,7 @@ import axios from 'axios'
 import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
+import StepProgress from '../_components/StepProgress'
 function viewNotes() {
     const {courseId}=useParams();
     const [notes,setNotes]=useState();
@@ -22,14 +23,7 @@ function viewNotes() {
     }
   return notes&&(
     <div>
-    <div className='flex gap-5 items-center'>
-       {stepCount!=0&&<Button variant='outline' size='sm'  onClick={()=>setStepCount(stepCount-1)}>Previous</Button>}
-      {notes?.map((item,index)=>(
-          <div key={index} className={`w-full h-2 rounded-full ${index<=stepCount?'bg-green-500':'bg-gray-200 '}`}>
-        </div>
-      ))}
-      {stepCount<notes.length&&<Button variant='outline' size='sm' onClick={()=>setStepCount(stepCount+1)}>Next</Button>}
-    </div>
+    <StepProgress data={notes} stepCount={stepCount} setStepCount={setStepCount}/>
    {notes?.length!=stepCount?<div className='mt-10'>
        <div dangerouslySetInnerHTML={{__html:JSON.parse(notes[stepCount]?.notes)[0]?.content}}/>
     </div>:

@@ -1,103 +1,59 @@
-import Image from "next/image";
+import React from "react";
 import { Button } from "@/components/ui/button";
-export default function Home() {
+import { ArrowRight } from "lucide-react";
+import DashboardHeader from "./dashboard/_components/DashboardHeader";
+export default function LandingPage() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              app/page.js
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+    <div className="min-h-screen bg-white">
+      <DashboardHeader/>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+      {/* Hero Section */}
+      <main className="flex flex-col items-center text-center mt-16 px-4">
+        <div className="text-sm bg-gray-100 rounded-full px-3 py-1 mb-4 flex items-center gap-2">
+          <span className="bg-blue-600 text-white text-xs px-2 py-0.5 rounded">New</span>
+          <span>Tubeguruji.com All new Apps</span>
+          <span className="ml-2">→</span>
+        </div>
+
+        <h1 className="text-4xl md:text-6xl font-bold leading-tight max-w-4xl">
+          AI-Powered <span className="text-blue-600">Exam Prep</span> <br />
+          Material Generator
+        </h1>
+        <p className="mt-4 text-gray-500 text-lg max-w-xl">
+          Your AI Exam Prep Companion: Effortless Study Material at Your Fingertips
+        </p>
+
+        <div className="flex gap-4 mt-8">
+          <Button className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 text-lg">
+            Get Started <ArrowRight className="ml-2 w-5 h-5" />
+          </Button>
+          <Button variant="outline" className="px-6 py-3 text-lg">
+            ▶ Watch video
+          </Button>
+        </div>
+
+        {/* Emojis or Icons */}
+        <div className="flex justify-between w-full max-w-6xl mt-10">
+          <img src="/code.png" alt="emoji-left" className="h-16 md:h-24" />
+          <img src="/knowledge.png" alt="emoji-right" className="h-16 md:h-24" />
+        </div>
+
+        {/* Featured In */}
+        <div className="mt-20 text-gray-400 text-sm uppercase tracking-wider">
+          Featured In
+        </div>
+        <div className="flex gap-12 mt-4 text-gray-700 text-lg font-medium">
+          <span className="flex items-center gap-2">
+            <img src="/yt.svg" alt="YouTube" className="h-6" /> YouTube
+          </span>
+          <span className="flex items-center gap-2">
+            <img src="/ph.svg" alt="Product Hunt" className="h-6" /> Product Hunt
+          </span>
+          <span className="flex items-center gap-2">
+            <img src="/reddit.svg" alt="Reddit" className="h-6" /> Reddit
+          </span>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
