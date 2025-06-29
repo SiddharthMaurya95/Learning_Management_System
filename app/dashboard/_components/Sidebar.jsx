@@ -1,4 +1,5 @@
 "use client"
+import { BrainCircuit, Navigation } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react'
 import Image from 'next/image';
@@ -27,14 +28,20 @@ path:'/dashboard/upgrade'
 name:'Profile',
 icon:UserCircle,
 path:'/dashboard/profile'
-}
+},
+{
+name:'Explore Courses',
+icon:Navigation,
+path:'/dashboard/explore'
+},
   ]
   return (
     <div>
       <div className='h-screen shadow-md p-5'>
-      <div className='flex gap-2 items-center'><Image src={'/logo.svg'} alt='logo' width={40} height={40}/>
-      <h2 className='font-bold text-2xl'>Easy Study</h2>
-      </div>
+        <Link href={'/'}>
+      <div className='flex gap-2 items-center'> <BrainCircuit className="h-8 w-8 text-green-600" />
+            <span className="self-center text-2xl font-semibold whitespace-nowrap text-gray-900">CourseCraft</span>
+      </div></Link>
       <div className='mt-10' >
         <Link href={'/create'}>
         <Button className='w-full bg-green-500 text-white cursor-pointer hover:bg-slate-300'>+ Create New</Button>

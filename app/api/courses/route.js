@@ -4,10 +4,15 @@ import { NextResponse } from "next/server";
 import {desc, eq} from "drizzle-orm";
 export async function POST(req){
     const {createdBy}=await req.json();
-
-    const result=await db.select().from(STUDY_MATERIAL_TABLE)
-    .where(eq(STUDY_MATERIAL_TABLE.createdBy,createdBy)).orderBy(desc(STUDY_MATERIAL_TABLE.id));
+    const {searchParams}= new URL(req.url);
+    const courseId=searchParams?.get('courseId')
+    if(courseId === "0"){
+        const result=await db.select().from(STUDY_MATERIAL_TABLE);
 return NextResponse.json({result:result});
+    }
+   else{ const result=await db.select().from(STUDY_MATERIAL_TABLE)
+    .where(eq(STUDY_MATERIAL_TABLE.createdBy,createdBy)).orderBy(desc(STUDY_MATERIAL_TABLE.id));
+return NextResponse.json({result:result});}
 }
 
 export async function GET(req){

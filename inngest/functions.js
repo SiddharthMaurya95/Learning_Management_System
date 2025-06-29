@@ -43,19 +43,12 @@ export const GenerateNotes=inngest.createFunction(
     let index=0;
     Chapters.forEach(async(chapter) => {
       
-    const prompt=`Generate detailed exam-oriented content for each chapter provided in ${JSON.stringify(chapter)},The output should be in pure HTML format (do NOT include <html>, <head>, <body>, or <title> tags),
-,Maintain proper gaps between different sections, make Chapter heading bold,Cover all topic points thoroughly with explanations,
-Use realistic and relatable examples to illustrate each concept clearly,
-Highlight important terms and definitions using bold, underline, or background-color styling,
-Each heading should use appropriate HTML tags (<h2>,<h3>, etc.) with inline CSS for styling (e.g., bold, padding, color),
-Use structured layout: use paragraphs, lists, and subsections where appropriate,
-Include callout boxes (like tips or notes) with inline CSS to visually distinguish important insights,
-Keep the language exam-friendly and concise, suitable for revision and quick learning,
-Ensure the page looks visually clean and engaging, even as plain HTML,
+    const prompt=`Create comprehensive educational notes on ${JSON.stringify(chapter)} formatted as a single HTML format (do NOT include <html>, <head>, <body>, or <title> tags)
+document with inline CSS styling, structure the content with a prominently displayed main chapter title using decorative styling, include multiple sections (2-5) each covering key aspects of the topic with subsections that break down complex concepts into digestible parts, incorporate practical examples with relevant code snippets or real-world applications, add a summary section with key takeaways in bullet-point format, use a professional color scheme with blues (#2C3E50, #3498DB, #2980B9) for headers and greens (#27AE60, #1ABC9C) for success/tips and oranges (#E67E22, #F39C12) for warnings/examples, apply light gray (#f9f9f9) main background with white (#FFFFFF) content boxes, utilize Arial sans-serif typography with varied font sizes (2.2em for main title, 1.8em for sections, 1.5em for subsections), implement generous padding (15-20px) and margins (20-40px) for readability with rounded corners (8px) and subtle shadows plus colored left borders for emphasis, include highlighted key terms using background colors and bold text, create both ordered and unordered lists with proper nesting, style code blocks with background borders and monospace font, add color-coded tip/note boxes with icons, incorporate practical scenarios in highlighted boxes, center-align the main title while left-aligning section headers with bottom borders, design content boxes with white background and subtle borders and shadows, create information boxes with colored left borders (5px) and matching background tints, style code sections with gray background and borders and proper spacing, ensure adequate spacing between list items with nested structure for sub-points, generate a complete HTML document with full inline CSS styling and responsive design considerations and professional appearance suitable for educational materials with self-contained structure requiring no external dependencies.
 schema:
 [{
-  "content": "String"
-    }]
+"content": "String"
+}]
 `;
     const result=await chatSession.sendMessage(prompt)    
      const rawResp=result.response.text();
