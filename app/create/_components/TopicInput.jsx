@@ -7,23 +7,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
-function TopicInput({setTopic,setDifficultyLevel}) {
+function TopicInput({setTopic,setAbout}) {
   return (
     <div>
-        <h2>Input the Topic or the Content for Which you want to Generate Study Materials</h2>
+        <h2 className='mt-5'>Write the topic for which you want to generate a course(eg., Python Course, Yoga, etc)</h2>
         <Textarea placeholder='Start writing here' 
-        onChange={(event)=>setTopic(event.target.value)} className='mt-2'></Textarea>
-        <h2 className='mt-5 mb-3'>Select the difficulty level</h2>
-        <Select onValueChange={(value)=>setDifficultyLevel(value)}>
-  <SelectTrigger className="w-full">
-    <SelectValue placeholder="Difficulty Level" />
-  </SelectTrigger>
-  <SelectContent>
-    <SelectItem value="Easy">Easy</SelectItem>
-    <SelectItem value="Medium">Medium</SelectItem>
-    <SelectItem value="Hard">Hard</SelectItem>
-  </SelectContent>
-</Select>
+        onChange={(event)=>setTopic(event.target.value)} className='mt-2' required></Textarea>
+
+        <h2 className='mt-5'>Tell us more about your course, what you want to include in this course</h2>
+        <Textarea placeholder='About your course' 
+        onChange={(event)=> setAbout(event.target.value)} className='mt-2' required></Textarea>
     </div>
   )
 }

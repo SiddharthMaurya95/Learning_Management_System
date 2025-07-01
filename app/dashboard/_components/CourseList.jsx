@@ -26,7 +26,7 @@ function CourseList(){
             <h2 className='font-bold text-2xl flex justify-between items-center'>Your study Material <Button onClick={GetCourseList} variant='outline'className='border-black text-black cursor-pointer hover:bg-gray-200'><RefreshCw></RefreshCw> Refresh</Button></h2>
             <div className='grid grid-cols-2 md:grid-cols-2 lg:grid-col-3 mt-2 gap-5'>
                 {courseList?.map((course,index)=>(
-                    <CourseCardItem course={course} key={index}/>
+                    <CourseCardItem course={course} key={index} refreshData={()=>GetCourseList()}/>
                 ))}
             </div>
         </div>

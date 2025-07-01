@@ -4,6 +4,7 @@ import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
 import { Button } from '@/components/ui/button'
 import StepProgress from '../_components/StepProgress'
+import service from '@/configs/service'
 function viewNotes() {
     const {courseId}=useParams();
     const [notes,setNotes]=useState();
@@ -25,6 +26,7 @@ function viewNotes() {
     <div>
     <StepProgress data={notes} stepCount={stepCount} setStepCount={setStepCount}/>
    {notes?.length!=stepCount?<div className='mt-10'>
+    
        <div dangerouslySetInnerHTML={{__html:JSON.parse(notes[stepCount]?.notes)[0]?.content}}/>
     </div>:
        <div className='flex items-center gap-10 flex-col justify-center'>

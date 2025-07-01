@@ -1,5 +1,5 @@
 'use client'
-import { useUser } from "@clerk/nextjs";
+import { PricingTable, useUser } from "@clerk/nextjs";
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { db } from "@/configs/db";
@@ -87,14 +87,15 @@ const PlanCard = ({ plan }) => {
 
 const PricingPlans = () => {
   return (
-    <div className="py-12 px-4 text-center">
-      <h1 className="text-3xl font-bold mb-8">Select Plan</h1>
-      <div className="flex flex-col md:flex-row gap-6 justify-center items-stretch">
-        {plans.map((plan, idx) => (
-          <PlanCard key={idx} plan={plan} />
-        ))}
-      </div>
-    </div>
+    // <div className="py-12 px-4 text-center">
+    //   <h1 className="text-3xl font-bold mb-8">Select Plan</h1>
+    //   <div className="flex flex-col md:flex-row gap-6 justify-center items-stretch">
+    //     {plans.map((plan, idx) => (
+    //       <PlanCard key={idx} plan={plan} />
+    //     ))}
+    //   </div>
+    // </div>
+    <PricingTable/>
   );
 };
 

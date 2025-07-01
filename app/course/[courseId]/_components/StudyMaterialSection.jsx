@@ -27,13 +27,13 @@ function StudyMaterialSection({courseId,course}) {
             path:'/quiz',
             type:'quiz'
         },
-        {
-            name:'Question/Answer',
-            desc:'Helps to practice your learning',
-            icon:'/qa.png',
-            path:'/qa',
-            type:'qa'
-        }
+        // {
+        //     name:'Question/Answer',
+        //     desc:'Helps to practice your learning',
+        //     icon:'/qa.png',
+        //     path:'/qa',
+        //     type:'qa'
+        // }
     ]
 useEffect(()=>{
     GetStudyMaterials();

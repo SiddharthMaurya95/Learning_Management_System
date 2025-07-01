@@ -11,6 +11,7 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel"
 function page() {
+  
     const {courseId} = useParams();
     const [flashcard,setFlashcard] = useState();
     const [api, setApi] = useState();
@@ -39,6 +40,7 @@ function page() {
     }
   return (
     <div>
+      
       <h2 className='font-bold text-2xl'>Flashcards</h2>
       <p>Flashcards: The Ultimate Tool to lock in concepts!</p>
       <div className='mt-10'>

@@ -6,13 +6,15 @@ import { inngest } from "@/inngest/client";
 
 export async function POST(req) {
   try {
-      const { courseId, topic, courseType, difficultyLevel, createdBy } = await req.json();
+      const { courseId, topic, courseType, difficultyLevel, createdBy,noOfChapters ,courseDuration, addVideo, about} = await req.json();
    
-       const prompt = `Generate a study material for ${topic} for ${courseType} and level of difficulty will be ${difficultyLevel}. Include: course summary, list of chapters with summaries and Emoji icon for each chapter, topic list in each chapter, Return result in JSON format.
+       const prompt = `Generate a study material for ${topic} about ${about} for ${courseType} and level of difficulty will be ${difficultyLevel} of Duration ${courseDuration}. Include: course summary, list of ${noOfChapters} chapters with summaries and Emoji icon for each chapter, topic list in each chapter, Return result in JSON format.
        Schema:
        {
        "course_title":"string",
        "difficulty":"string",
+       "courseDuration":"string",
+       "noOfChapters":"string",
        "summary":"string",
        "chapters":[
        {
@@ -53,9 +55,7 @@ export async function POST(req) {
       }
     })
     console.log(result)
-    return NextResponse.json({ result: dbResult[0] });
-
-
+    return NextResponse.json({ result: result });
   } catch (error) {
     console.error("❌ API Error:", error);
     return NextResponse.json({ error: error.message || "Server Error" }, { status: 500 });
