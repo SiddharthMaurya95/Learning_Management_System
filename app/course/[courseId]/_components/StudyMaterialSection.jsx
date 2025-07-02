@@ -5,6 +5,7 @@ import axios from 'axios'
 
 function StudyMaterialSection({courseId,course}) {
     const [studyTypeContent,setStudyTypeContent]=useState();
+    const [status,setStatus]=useState(false);
     const MaterialList=[
         {
             name:'Notes/Chapters',
@@ -52,7 +53,7 @@ const GetStudyMaterials=async ()=>{
         <div className='grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-3'>{
             MaterialList.map((item,index)=>( 
               
-                <MaterialCardItem item={item} key={index} studyTypeContent={studyTypeContent} course={course} refreshData={GetStudyMaterials}/>
+                <MaterialCardItem item={item} setStatus={setStatus} status={status} key={index} studyTypeContent={studyTypeContent} course={course} refreshData={GetStudyMaterials}/>
                
             ))}</div>
     </div>

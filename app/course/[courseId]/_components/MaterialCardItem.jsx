@@ -7,12 +7,13 @@ import { toast } from 'sonner';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
-function MaterialCardItem({item,studyTypeContent,course,refreshData}) {
+function MaterialCardItem({item,studyTypeContent,course,refreshData,setStatus,status}) {
   const [loading,setLoading]=useState(false);
   const GenerateContent=async()=>{
     console.log(course)
     toast('Generating your content, please wait...')
     setLoading(true)
+    setStatus(true);
     let chapters=''
     course?.courseLayout?.chapters.forEach((chapter) => {
       chapters=(chapter.chapter_title||chapter.chapterTitle)+','+chapters
@@ -25,6 +26,7 @@ function MaterialCardItem({item,studyTypeContent,course,refreshData}) {
      })
      setTimeout(() => {
   setLoading(false)
+  setStatus(false);
   refreshData(true)
 }, 10000);
      
@@ -42,8 +44,8 @@ function MaterialCardItem({item,studyTypeContent,course,refreshData}) {
          <Image src={item.icon} alt={item.name} width={50} height={50}></Image>   
          <h2 className='font-medium'>{item.name}</h2>
          <p className='text-gray-500 text-sm text-center'>{item.desc}</p>
-       {studyTypeContent?.[item.type]?.length==null||studyTypeContent?.[item.type]?.length==0?<Button className='primaryBorder mt-3 w-full cursor-pointer hover:scale-105 transition-all' variant='outline' onClick={()=>GenerateContent()}>{loading&& <RefreshCcw className='animate-spin'/>}Generate</Button>:
-        <Link href={'/course/'+course?.courseId+item.path}><Button className='primaryBorder mt-3 w-full cursor-pointer hover:scale-105 transition-all hover:border-b-green-950' variant='outline'>View</Button></Link>}
+       {studyTypeContent?.[item.type]?.length==null||studyTypeContent?.[item.type]?.length==0?<Button disabled={status} className='primaryBorder mt-3 w-full cursor-pointer hover:scale-105 transition-all' variant='outline' onClick={()=>GenerateContent()}>{loading&& <RefreshCcw className='animate-spin'/>}Generate</Button>:
+       <Button onClick={() => window.location.href = '/course/'+course?.courseId+item.path} className='primaryBorder mt-3 w-full cursor-pointer hover:scale-105 transition-all hover:border-b-green-950' variant='outline'>View</Button>}
     </div>
    
   )
