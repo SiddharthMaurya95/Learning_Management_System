@@ -5,15 +5,22 @@ import { GoogleGenAI } from '@google/genai';
 import { inngest } from "@/inngest/client";
 
 export async function POST(req) {
+  const today = new Date();
+const formattedDate = today.toLocaleDateString("en-GB", {
+  day: "numeric",
+  month: "short",  // Gives 'Jun'
+  year: "numeric"
+});
   try {
       const { courseId, topic, courseType, difficultyLevel, createdBy,noOfChapters ,courseDuration, addVideo, about} = await req.json();
    
-       const prompt = `Generate a study material for ${topic} about ${about} for ${courseType} and level of difficulty will be ${difficultyLevel} of Duration ${courseDuration}. Include: course summary, list of ${noOfChapters} chapters with summaries and Emoji icon for each chapter, topic list in each chapter, Return result in JSON format.
+       const prompt = `Generate a study material for ${topic} about ${about} for ${courseType} and level of difficulty will be ${difficultyLevel} of Duration ${courseDuration}. Include: course summary, list of ${noOfChapters} chapters with summaries and Emoji icon for each chapter, topic list in each chapter, add creationDate in format as ${formattedDate}, Return result in JSON format.
        Schema:
        {
        "course_title":"string",
        "difficulty":"string",
        "courseDuration":"string",
+       "creationDate":"string",
        "noOfChapters":"string",
        "summary":"string",
        "chapters":[

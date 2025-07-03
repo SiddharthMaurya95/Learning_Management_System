@@ -13,19 +13,14 @@ import { db } from '@/configs/db'
 import { useEffect } from 'react'
 export default function CourseCardItem({course,refreshData}) {
    useEffect(() => {
-    const interval = setInterval(() => {
-      refreshData;
-    }, 5000); // every 1 second
+  if (course?.status !== "Generating") return;
 
-    const timeout = setTimeout(() => {
-      clearInterval(interval);
-    }, 120000); // stop after 2 minutes (120,000 ms)
+  const interval = setInterval(() => {
+    refreshData();
+  }, 1000);
 
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timeout);
-    };
-  }, [refreshData]);
+  return () => clearInterval(interval);
+}, [course?.status, refreshData]);
   const handleOnDelete=async()=>{ 
     const resp1=await db.delete(STUDY_MATERIAL_TABLE).where(eq(STUDY_MATERIAL_TABLE.courseId,course?.courseId)).returning({id:STUDY_MATERIAL_TABLE.courseId})
     const resp2=await db.delete(CHAPTER_NOTES_TABLE).where(eq(CHAPTER_NOTES_TABLE.courseId,course?.courseId)).returning({id:CHAPTER_NOTES_TABLE.courseId})
@@ -40,7 +35,7 @@ export default function CourseCardItem({course,refreshData}) {
         <div>
             <div className='flex justify-between items-center'>
                 <Image src={'/knowledge.png'} alt='other' width={50} height={50}></Image>
-                <h2 className='text-[10px] p-1 px-2 rounded-full bg-green-900 text-white'>17 june 2025</h2>
+                <h2 className='text-[10px] p-1 px-2 rounded-full bg-green-900 text-white'>{course?.courseLayout?.creationDate}</h2>
             </div>
             <div className='flex justify-between items-center mt-3'>
             <h2 className=' font-medium text-lg'>{course?.courseLayout?.course_title}</h2>
