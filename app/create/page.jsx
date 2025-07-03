@@ -78,7 +78,7 @@ function create() {
     <div>
       <Dashboard></Dashboard>
     <div className='flex flex-col justify-center items-center p-5 md:px-24 lg:px-36 mt-5 '>
-        <h2 className=' text-4xl font-bold text-green-400'>Start Buliding your Personal Study Materials</h2>
+        <h2 className=' text-4xl font-bold text-center text-green-400'>Start Buliding your Personal Study Materials</h2>
         <div className='flex justify-center items-center mt-10 mb-10'>
         {stepperOptions.map((item,index)=>(
           <div key={index} className='flex items-center justify-center '>
@@ -92,7 +92,7 @@ function create() {
         </div>
         ))}
         </div>
-        <p className='text-gray-500 text-lg'>Fill all the details in order to generate materials</p>
+        <p className='text-gray-500 text-lg text-center'>Fill all the details in order to generate materials</p>
         <div>
             {step==0&&<SelectOptions selectedStudyType={(value)=>handleUserInput('courseType',value)}></SelectOptions>}
             {step==1&&<TopicInput

@@ -48,16 +48,16 @@ path:'/dashboard/explore'
         </Link>
         <div className='mt-5'>
           {MenuList.map((menu,index)=>(
-            <Link href={menu.path} key={index}>
-            <div key={index} className={`flex gap-5 items-center p-3 hover:bg-slate-200 rounded-lg cursor-pointer mt-3 ${path==menu.path&&'bg-slate-200'}`}>
+           
+            <div key={index} onClick={() => { window.location.href = menu.path; }} className={`flex gap-5 items-center p-3 hover:bg-slate-200 rounded-lg cursor-pointer mt-3 ${path==menu.path&&'bg-slate-200'}`}>
               <menu.icon/>
               <h2>{menu.name}</h2>
             </div>
-            </Link>
+           
           ))}
         </div>
       </div>
-      <div className='primaryBorder p-3 bg-slate-200 rounded-lg absolute bottom-10 w-[85%]'>
+      <div className='primaryBorder p-3 bg-slate-200 rounded-lg absolute bottom-10'>
         <h2 className='text-lg mb-2'>Available Credits : {15-totalCourses}</h2>
        <Progress className='w-full bg-slate-500' value={(totalCourses/15)*100} />
         <h2 className='text-sm'>{totalCourses} out of 15 credits used</h2> 

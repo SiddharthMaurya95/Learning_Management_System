@@ -5,7 +5,7 @@ function Profile() {
     <div>
       <h2 className='font-bold text-3xl mb-7'>Manage Your Profile</h2>
       <div className='flex justify-center'>
-      <UserProfile/>
+      <UserProfile routing="hash"/>
       </div>
     </div>
   )

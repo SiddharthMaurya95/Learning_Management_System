@@ -10,8 +10,10 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import DashboardHeader from '@/app/dashboard/_components/DashboardHeader';
+import { useRouter } from 'next/navigation';
 function page() {
-  
+  const route=useRouter();
     const {courseId} = useParams();
     const [flashcard,setFlashcard] = useState();
     const [api, setApi] = useState();
@@ -40,6 +42,8 @@ function page() {
     }
   return (
     <div>
+      <DashboardHeader back={()=>route.back()}></DashboardHeader>
+    <div className='p-13 pt-20'>
       
       <h2 className='font-bold text-2xl'>Flashcards</h2>
       <p>Flashcards: The Ultimate Tool to lock in concepts!</p>
@@ -56,6 +60,7 @@ function page() {
   <CarouselNext />
 </Carousel>
       </div>
+    </div>
     </div>
   )
 }

@@ -5,6 +5,7 @@ import axios from 'axios';
 import CourseIntroCard from './_components/CourseIntroCard';
 import StudyMaterialSection from './_components/StudyMaterialSection';
 import ChapterList from './_components/ChapterList'
+import DashboardHeader from '@/app/dashboard/_components/DashboardHeader';
 function course() {
     const {courseId}=useParams();
     const [course,setCourse]=useState();
@@ -18,6 +19,8 @@ function course() {
     }
   return (
     <div>
+      <DashboardHeader ></DashboardHeader>
+    <div className='p-10 pt-20'>
         
         <div>
         {/* course Intro */}
@@ -27,6 +30,7 @@ function course() {
           {/* chapter List */}
           <ChapterList course={course}></ChapterList>
         </div>
+    </div>
     </div>
   )
 }

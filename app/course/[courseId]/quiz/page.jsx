@@ -5,7 +5,11 @@ import { useParams } from 'next/navigation';
 import { useEffect,useState } from 'react';
 import StepProgress from '../_components/StepProgress';
 import QuizCardItem from './_components/QuizCardItem';
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+import DashboardHeader from '@/app/dashboard/_components/DashboardHeader';
 function Quiz() {
+   const route=useRouter()
     const {courseId} = useParams();
     const [quiz,setQuiz] = useState();
     const [stepCount,setStepCount] = useState(0);
@@ -30,14 +34,17 @@ function Quiz() {
     }
     const checkAnswer=(userAnswer,currentQuestion)=>{
       if(userAnswer === currentQuestion?.answer) {
-        setIsCorrectAnswer(true);
         setCorrectAnswer(currentQuestion?.answer);
+        setIsCorrectAnswer(true);
       } else {
+        setCorrectAnswer(currentQuestion?.answer);
         setIsCorrectAnswer(false);
       }
     }
   return (
     <div>
+      <DashboardHeader back={()=>route.back()}></DashboardHeader>
+    <div className='p-3 mt-1'>
       <h2 className='font-bold text-2xl text-center mb-5'>Quiz</h2>
       <StepProgress data={quizData} stepCount={stepCount} setStepCount={(v)=>setStepCount(v)}></StepProgress>
       <div>
@@ -55,6 +62,13 @@ function Quiz() {
           <p className='text-green-500'>Your Answer is correct </p>
         </div>
         </div>}
+        {
+          stepCount==quizData.length&&<div className='flex items-center gap-10 flex-col justify-center'>
+        <h2>End of Quiz</h2>
+        <Button  onClick={()=>route.back()} variant='outline' className='bg-green-500 text-white'>Go to Course Page</Button>
+        </div>
+        }
+    </div>
     </div>
   )
 }

@@ -1,13 +1,12 @@
+'use client'
 import React from 'react'
-import DashboardHeader from '../dashboard/_components/DashboardHeader'
+import { useRouter } from 'next/navigation'
 function CourseViewLayout({children}) {
+  const route=useRouter()
   return (
-    <div>
-        <DashboardHeader></DashboardHeader>
-      <div  className='mx-w-full md:mx-36 lg:px-60 mt-10'>
+      <div  className='mx-w-full md:mx-36 lg:px-60'>
         {children}
       </div>
-    </div>
   )
 }
 
