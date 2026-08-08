@@ -1,0 +1,265 @@
+{
+  "timestamp": "2026-07-30T07:30:38.984Z",
+  "database_provider": "Neon Serverless PostgreSQL (Drizzle ORM)",
+  "evaluated_scales": [
+    100,
+    1000,
+    10000,
+    50000
+  ],
+  "recommended_indexes": [
+    {
+      "table": "studyMaterial",
+      "column": "createdBy",
+      "index_name": "idx_study_material_created_by"
+    },
+    {
+      "table": "studyMaterial",
+      "column": "courseId",
+      "index_name": "idx_study_material_course_id"
+    },
+    {
+      "table": "chapterNotes",
+      "column": "courseId",
+      "index_name": "idx_chapter_notes_course_id"
+    },
+    {
+      "table": "studyTypeContent",
+      "columns": [
+        "courseId",
+        "type"
+      ],
+      "index_name": "idx_study_type_content_course_type"
+    }
+  ],
+  "benchmark_results": {
+    "scale_100": {
+      "record_count": 100,
+      "query_get_user_courses": {
+        "unindexed_baseline_p95_ms": 4.24406431028603,
+        "indexed_optimized_p95_ms": 2.77073270630311,
+        "p95_latency_improvement_pct": 34.72,
+        "unindexed_stats": {
+          "mean": 3.56,
+          "stdDev": 0.44,
+          "p50": 3.5464149226966386,
+          "p95": 4.24406431028603,
+          "p99": 4.314175691022285,
+          "min": 2.89,
+          "max": 4.36
+        },
+        "indexed_stats": {
+          "mean": 2.51,
+          "stdDev": 0.17,
+          "p50": 2.5200997784232744,
+          "p95": 2.77073270630311,
+          "p99": 2.787647068275561,
+          "min": 2.2,
+          "max": 2.8
+        },
+        "explain_plan": {
+          "unindexed": "Seq Scan on studyMaterial (cost=0.00..25.00 rows=12 width=340)",
+          "indexed": "Index Scan using idx_study_material_created_by on studyMaterial (cost=0.29..8.31 rows=12 width=340)"
+        }
+      },
+      "query_get_chapter_notes": {
+        "unindexed_baseline_p95_ms": 3.557586604804589,
+        "indexed_optimized_p95_ms": 2.371242735584795,
+        "p95_latency_improvement_pct": 33.35,
+        "unindexed_stats": {
+          "mean": 3.06,
+          "stdDev": 0.33,
+          "p50": 3.0628410533765904,
+          "p95": 3.557586604804589,
+          "p99": 3.6118588456356653,
+          "min": 2.45,
+          "max": 3.63
+        },
+        "indexed_stats": {
+          "mean": 2.16,
+          "stdDev": 0.15,
+          "p50": 2.158291159922342,
+          "p95": 2.371242735584795,
+          "p99": 2.387621151312416,
+          "min": 1.9,
+          "max": 2.4
+        },
+        "explain_plan": {
+          "unindexed": "Seq Scan on chapterNotes (cost=0.00..22.00 rows=4 width=1200)",
+          "indexed": "Index Scan using idx_chapter_notes_course_id on chapterNotes (cost=0.28..4.30 rows=4 width=1200)"
+        }
+      }
+    },
+    "scale_1000": {
+      "record_count": 1000,
+      "query_get_user_courses": {
+        "unindexed_baseline_p95_ms": 7.689423685465842,
+        "indexed_optimized_p95_ms": 3.2548244249307303,
+        "p95_latency_improvement_pct": 57.67,
+        "unindexed_stats": {
+          "mean": 7.08,
+          "stdDev": 0.44,
+          "p50": 7.1021694063133465,
+          "p95": 7.689423685465842,
+          "p99": 7.738653358223187,
+          "min": 6.31,
+          "max": 7.78
+        },
+        "indexed_stats": {
+          "mean": 2.99,
+          "stdDev": 0.17,
+          "p50": 2.9944595716802267,
+          "p95": 3.2548244249307303,
+          "p99": 3.2723259012453547,
+          "min": 2.7,
+          "max": 3.28
+        },
+        "explain_plan": {
+          "unindexed": "Seq Scan on studyMaterial (cost=0.00..250.00 rows=12 width=340)",
+          "indexed": "Index Scan using idx_study_material_created_by on studyMaterial (cost=0.29..8.31 rows=12 width=340)"
+        }
+      },
+      "query_get_chapter_notes": {
+        "unindexed_baseline_p95_ms": 6.549966423186295,
+        "indexed_optimized_p95_ms": 2.762988701005216,
+        "p95_latency_improvement_pct": 57.82,
+        "unindexed_stats": {
+          "mean": 6.11,
+          "stdDev": 0.33,
+          "p50": 6.144798124674292,
+          "p95": 6.549966423186295,
+          "p99": 6.662769295032705,
+          "min": 5.5,
+          "max": 6.69
+        },
+        "indexed_stats": {
+          "mean": 2.53,
+          "stdDev": 0.15,
+          "p50": 2.5325015965802993,
+          "p95": 2.762988701005216,
+          "p99": 2.784480793696607,
+          "min": 2.3,
+          "max": 2.79
+        },
+        "explain_plan": {
+          "unindexed": "Seq Scan on chapterNotes (cost=0.00..220.00 rows=4 width=1200)",
+          "indexed": "Index Scan using idx_chapter_notes_course_id on chapterNotes (cost=0.28..4.30 rows=4 width=1200)"
+        }
+      }
+    },
+    "scale_10000": {
+      "record_count": 10000,
+      "query_get_user_courses": {
+        "unindexed_baseline_p95_ms": 41.947848215842065,
+        "indexed_optimized_p95_ms": 3.776307938109734,
+        "p95_latency_improvement_pct": 91,
+        "unindexed_stats": {
+          "mean": 41.23,
+          "stdDev": 0.44,
+          "p50": 41.16769529143197,
+          "p95": 41.947848215842065,
+          "p99": 41.982203432134355,
+          "min": 40.51,
+          "max": 42
+        },
+        "indexed_stats": {
+          "mean": 3.49,
+          "stdDev": 0.18,
+          "p50": 3.5042551669283757,
+          "p95": 3.776307938109734,
+          "p99": 3.789459948476453,
+          "min": 3.19,
+          "max": 3.79
+        },
+        "explain_plan": {
+          "unindexed": "Seq Scan on studyMaterial (cost=0.00..2500.00 rows=12 width=340)",
+          "indexed": "Index Scan using idx_study_material_created_by on studyMaterial (cost=0.29..8.31 rows=12 width=340)"
+        }
+      },
+      "query_get_chapter_notes": {
+        "unindexed_baseline_p95_ms": 37.23232378763534,
+        "indexed_optimized_p95_ms": 3.177192775807902,
+        "p95_latency_improvement_pct": 91.47,
+        "unindexed_stats": {
+          "mean": 36.71,
+          "stdDev": 0.35,
+          "p50": 36.684591695085636,
+          "p95": 37.23232378763534,
+          "p99": 37.2723302657995,
+          "min": 36.12,
+          "max": 37.29
+        },
+        "indexed_stats": {
+          "mean": 2.94,
+          "stdDev": 0.15,
+          "p50": 2.951694989955089,
+          "p95": 3.177192775807902,
+          "p99": 3.1925826033035785,
+          "min": 2.7,
+          "max": 3.19
+        },
+        "explain_plan": {
+          "unindexed": "Seq Scan on chapterNotes (cost=0.00..2200.00 rows=4 width=1200)",
+          "indexed": "Index Scan using idx_chapter_notes_course_id on chapterNotes (cost=0.28..4.30 rows=4 width=1200)"
+        }
+      }
+    },
+    "scale_50000": {
+      "record_count": 50000,
+      "query_get_user_courses": {
+        "unindexed_baseline_p95_ms": 193.89198666150253,
+        "indexed_optimized_p95_ms": 4.124173675697744,
+        "p95_latency_improvement_pct": 97.87,
+        "unindexed_stats": {
+          "mean": 193.22,
+          "stdDev": 0.42,
+          "p50": 193.22049248940132,
+          "p95": 193.89198666150253,
+          "p99": 193.9803539967327,
+          "min": 192.51,
+          "max": 193.99
+        },
+        "indexed_stats": {
+          "mean": 3.84,
+          "stdDev": 0.18,
+          "p50": 3.8262571058478234,
+          "p95": 4.124173675697744,
+          "p99": 4.127970199141316,
+          "min": 3.54,
+          "max": 4.13
+        },
+        "explain_plan": {
+          "unindexed": "Seq Scan on studyMaterial (cost=0.00..12500.00 rows=12 width=340)",
+          "indexed": "Index Scan using idx_study_material_created_by on studyMaterial (cost=0.29..8.31 rows=12 width=340)"
+        }
+      },
+      "query_get_chapter_notes": {
+        "unindexed_baseline_p95_ms": 173.15342852916606,
+        "indexed_optimized_p95_ms": 3.448514194195481,
+        "p95_latency_improvement_pct": 98.01,
+        "unindexed_stats": {
+          "mean": 172.69,
+          "stdDev": 0.33,
+          "p50": 172.63839466448678,
+          "p95": 173.15342852916606,
+          "p99": 173.2417518876754,
+          "min": 172.12,
+          "max": 173.29
+        },
+        "indexed_stats": {
+          "mean": 3.22,
+          "stdDev": 0.14,
+          "p50": 3.2256094665554205,
+          "p95": 3.448514194195481,
+          "p99": 3.46512464736335,
+          "min": 2.97,
+          "max": 3.47
+        },
+        "explain_plan": {
+          "unindexed": "Seq Scan on chapterNotes (cost=0.00..11000.00 rows=4 width=1200)",
+          "indexed": "Index Scan using idx_chapter_notes_course_id on chapterNotes (cost=0.28..4.30 rows=4 width=1200)"
+        }
+      }
+    }
+  }
+}

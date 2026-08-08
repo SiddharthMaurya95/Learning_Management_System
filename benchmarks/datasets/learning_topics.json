@@ -1,0 +1,43 @@
+{
+  "categories": [
+    {
+      "name": "Computer Science",
+      "topics": [
+        "Data Structures and Algorithms",
+        "Operating Systems & Process Synchronization",
+        "Database Management Systems and Indexing",
+        "Computer Networks and TCP/IP Protocols"
+      ]
+    },
+    {
+      "name": "Mathematics",
+      "topics": [
+        "Discrete Mathematics and Graph Theory",
+        "Linear Algebra & Matrix Decompositions",
+        "Multivariable Calculus and Vector Fields"
+      ]
+    },
+    {
+      "name": "Science",
+      "topics": [
+        "Quantum Mechanics and Wave Functions",
+        "Organic Chemistry and Reaction Mechanisms",
+        "Thermodynamics and Heat Transfer"
+      ]
+    },
+    {
+      "name": "Humanities",
+      "topics": [
+        "World History: Industrial Revolution",
+        "Cognitive Psychology and Memory Formation"
+      ]
+    },
+    {
+      "name": "Business",
+      "topics": [
+        "Financial Accounting and Balance Sheets",
+        "Microeconomics and Market Structures"
+      ]
+    }
+  ]
+}
